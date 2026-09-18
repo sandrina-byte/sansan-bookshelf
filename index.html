@@ -37,7 +37,13 @@
     margin: 0 auto;
     padding: 40px 32px 80px;
   }
-  
+/* ---------- CSS ---------- */
+  .top-section {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  align-items: start;
+
   /* ---------- Top bar ---------- */
   .topbar {
     display: flex;
@@ -74,9 +80,9 @@
   /* ---------- Hero ---------- */
   .hero {
     text-align: center;
-    margin: 54px 0 40px;
+    margin: 0;
   }
-
+  
   .hero .lead {
     font-family: 'Zeyada', cursive;
     font-weight: 700;
@@ -369,8 +375,7 @@
 <div class="wrap">
   
 <div class="top-section">
-  
-  <div class="topbar">
+    <div class="topbar">
     <div class="logo">Sansan's Digital Corner</div>
     <nav class="top-nav">
       <span>BERANDA</span>
@@ -378,36 +383,47 @@
       <span>INSTAGRAM ↗</span>
     </nav>
   </div>
+   <div class="main-content">
 
-  <div class="hero">
-    <p class="lead">Welcome to little sansan</p>
-    <p class="script">digital book corner</p>
-  </div>
+    <div class="hero">
+      <p class="lead">Welcome to little sansan</p>
+      <p class="script">digital book corner</p>
+    </div>
 
-  <div class="controls">
-    <div class="filter-group">
-      <span class="filter-label">STATUS</span>
-      <div id="statusTabs" style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="pill active" data-status="all">All</button>
-        <button class="pill" data-status="read">Finished</button>
-        <button class="pill" data-status="reading">Reading</button>
-        <button class="pill" data-status="dropped">Drops</button>
-        <button class="pill" data-status="paused">On Hold</button>
+    <div class="controls">
+      <div class="filter-group">
+        <span class="filter-label">STATUS</span>
+        <div id="statusTabs" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="pill active" data-status="all">All</button>
+          <button class="pill" data-status="read">Finished</button>
+          <button class="pill" data-status="reading">Reading</button>
+          <button class="pill" data-status="dropped">Drops</button>
+          <button class="pill" data-status="paused">On Hold</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Find</span>
+        <div class="search-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input id="searchInput" type="text" placeholder="title or author...">
+        </div>
       </div>
     </div>
-    <div class="filter-group">
-      <span class="filter-label">Find</span>
-      <div class="search-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input id="searchInput" type="text" placeholder="title or author...">
-      </div>
+
+    <div class="shelf-area">
+      <div class="shelf" id="shelf"></div>
     </div>
+
   </div>
 
-  <div class="shelf-area">
-    <div class="shelf" id="shelf"></div>
-  </div>
+  <div></div>
 
+</div>
+  
   <footer>
     Klik salah satu buku untuk lihat rating &amp; catatan. Ganti daftar di bagian <code>BOOKS</code> pada kode untuk pakai koleksimu sendiri.
   </footer>
