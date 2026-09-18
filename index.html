@@ -37,14 +37,15 @@
     margin: 0 auto;
     padding: 40px 32px 80px;
   }
-
+  
   /* ---------- Top bar ---------- */
   .topbar {
     display: flex;
-    lex-direction: column;
+    justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 40px;
+
 }
   }
 
@@ -57,10 +58,11 @@
   }
 
   nav.top-nav {
-    display: flex;
-    gap: 22px;
-    flex-wrap: wrap;
-    margin-top: 8px;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 0px;
     font-weight: 700;
     font-size: 0.8rem;
     letter-spacing: 0.02em;
@@ -360,7 +362,9 @@
 <body>
 
 <div class="wrap">
-
+  
+<div class="top-section">
+  
   <div class="topbar">
     <div class="logo">Sansan's Digital Corner</div>
     <nav class="top-nav">
