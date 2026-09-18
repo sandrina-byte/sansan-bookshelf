@@ -6,7 +6,7 @@
 <title>Sansan's Cabinet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
    --royal: #0A33A7;
@@ -43,7 +43,8 @@
   grid-template-columns: 180px 1fr;
   gap: 40px;
   align-items: start;
-
+  }
+  
   /* ---------- Top bar ---------- */
   .topbar {
     display: flex;
@@ -179,7 +180,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 0;
-  transform: scale(0.8);
+  transform: scale(1);
   transform-origin: top center;
 }
 
@@ -447,17 +448,17 @@
 <script>
   // ---- Ganti daftar buku di bawah ini dengan koleksimu sendiri ----
   const BOOKS = [
-    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", rating: 5, pages: 535, font: "sans",
+    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", rating: 5, pages: 535, font: "sans", width: 48, height: 205,
       note: "Salah satu yang paling nempel. Minke sebagai narator bikin sejarah kolonial terasa dekat, bukan cuma teks pelajaran." },
     { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", rating: 5, pages: 379, font: "sans", width: 42, height: 190,
       note: "Nangis di bagian sudut pandang adiknya. Cara nyeritain kehilangan tanpa jadi melodramatik." },
-    { title: "Norwegian Wood", author: "Haruki Murakami", status: "read", rating: 4, pages: 296, font: "script",
+    { title: "Norwegian Wood", author: "Haruki Murakami", status: "read", rating: 4, pages: 296, font: "script", width: 40, height: 180,
       note: "Melankolis banget, cocok dibaca pas musim hujan. Endingnya ngambang tapi entah kenapa pas." },
-    { title: "Educated", author: "Tara Westover", status: "read", rating: 5, pages: 334, font: "sans",
+    { title: "Educated", author: "Tara Westover", status: "read", rating: 5, pages: 334, font: "sans", width: 45, height: 185,
       note: "Memoar yang bikin mikir ulang soal pendidikan dan keluarga. Beberapa bab berat, siapin mental." },
-    { title: "Gadis Kretek", author: "Ratih Kumala", status: "read", rating: 4, pages: 275, font: "sans",
+    { title: "Gadis Kretek", author: "Ratih Kumala", status: "read", rating: 4, pages: 275, font: "sans", width: 38, height: 175,
       note: "Riset soal industri kretek-nya kerasa detail, alur tiga generasinya rapi." },
-    { title: "Atomic Habits", author: "James Clear", status: "reading", rating: 0, pages: 320, font: "sans",
+    { title: "Atomic Habits", author: "James Clear", status: "reading", rating: 0, pages: 320, font: "sans", width: 44, height: 185,
       note: "Baru sampai bab tentang identity-based habits. Praktikal, banyak yang langsung bisa dicoba." }
   ];
 
