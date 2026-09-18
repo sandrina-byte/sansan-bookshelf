@@ -1,48 +1,598 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sansan's Digital Book Corner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal: #C75E3C;
+    --royal-panel: #A84B2F;
+    --cream: #F4EFE0;
+    --cream-dim: rgba(244,239,224,0.72);
+    --ink: #5C2A18;
+    --focus: #F4EFE0;
+  }
 
-    <title>Sansan's Bookshelf</title>
+  * { box-sizing: border-box; }
 
-    <link rel="stylesheet" href="style.css">
+  html, body { background: var(--royal); }
+
+  body {
+    margin: 0;
+    color: var(--cream);
+    font-family: 'Public Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--cream); color: var(--royal); }
+
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  nav.top-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+  }
+
+  nav.top-nav span { opacity: 0.9; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    text-align: center;
+    margin: 54px 0 40px;
+  }
+
+  .hero .lead {
+    font-family: 'Zeyada', cursive;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .hero .script {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(3.4rem, 10vw, 6.4rem);
+    line-height: 1;
+    margin: 4px 0 2px;
+    color: var(--cream);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    align-items: center;
+    justify-content: center;
+    margin: 44px 0 10px;
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--cream-dim);
+  }
+
+  .pill {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: transparent;
+    border: 1.5px solid rgba(244,239,224,0.55);
+    color: var(--cream);
+    border-radius: 999px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .pill:hover { border-color: var(--cream); }
+
+  .pill.active {
+    border-color: var(--cream);
+    box-shadow: 0 0 0 2.5px rgba(244,239,224,0.35);
+    font-weight: 700;
+  }
+
+  .search-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid rgba(244,239,224,0.55);
+    border-radius: 999px;
+    padding: 7px 16px;
+  }
+
+  .search-pill svg { width: 14px; height: 14px; stroke: var(--cream-dim); flex-shrink: 0; }
+
+  .search-pill input {
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-family: 'Public Sans', sans-serif;
+    font-size: 0.9rem;
+    width: 150px;
+  }
+
+  .search-pill input::placeholder { color: var(--cream-dim); }
+  .search-pill input:focus { outline: none; }
+
+  /* ---------- Shelf ---------- */
+  .shelf-area { margin-top: 56px; }
+
+  .shelf {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .spine {
+    position: relative;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0 -2px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: transform 0.18s ease, filter 0.18s ease;
+    transform-origin: bottom center;
+  }
+
+  .spine:hover, .spine:focus-visible {
+    transform: translateY(-10px) rotate(0deg) !important;
+    filter: brightness(1.08);
+    z-index: 5;
+  }
+
+  .spine-body {
+    width: 100%;
+    height: 100%;
+    border-radius: 3px 3px 1px 1px;
+    box-shadow: 2px 0 0 rgba(0,0,0,0.08), 4px 8px 14px -6px rgba(50,20,10,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 12px;
+  }
+
+  .spine-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    max-height: 88%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+  }
+
+  .spine-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+
+  .spine-author {
+    font-size: 0.66rem;
+    font-weight: 400;
+    opacity: 0.72;
+    margin-top: 8px;
+  }
+
+  .ribbon {
+    position: absolute;
+    top: -2px;
+    right: 22%;
+    width: 12px;
+    height: 34px;
+    background: var(--cream);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  }
+
+  .notch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: var(--royal);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+  }
+
+  .empty-state {
+    padding: 50px 20px;
+    text-align: center;
+    color: var(--cream-dim);
+    border: 1.5px dashed rgba(244,239,224,0.4);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  footer {
+    margin-top: 70px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(244,239,224,0.25);
+    color: var(--cream-dim);
+    font-size: 0.82rem;
+  }
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(40, 16, 8, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+  }
+
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .modal {
+    background: var(--royal-deep);
+    border: 1.5px solid rgba(244,239,224,0.3);
+    max-width: 440px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    transform: translateY(10px);
+    transition: transform 0.18s ease;
+    color: var(--cream);
+  }
+
+  .modal-backdrop.open .modal { transform: translateY(0); }
+
+  .modal-inner { position: relative; padding: 30px 28px 26px; }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(244,239,224,0.14);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: var(--cream);
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border: 1.5px solid var(--cream);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .modal h3 {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+
+  .modal .author { font-size: 0.95rem; opacity: 0.85; margin-bottom: 14px; }
+
+  .modal .stars { font-size: 1.05rem; letter-spacing: 3px; margin-bottom: 14px; }
+  .modal .stars .off { opacity: 0.3; }
+
+  .modal .note { font-family: 'Public Sans', sans-serif; font-size: 0.98rem; line-height: 1.55; }
+
+  .modal .meta {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(244,239,224,0.25);
+    font-size: 0.82rem;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 28px 18px 60px; }
+    .topbar { flex-direction: column; }
+    .controls { justify-content: flex-start; }
+  }
+</style>
 </head>
-
 <body>
 
-    <header>
-        <h1>Sansan's Bookshelf</h1>
-        <p>a little corner of the internet for the books that stayed with me.</p>
-    </header>
+<div class="wrap">
 
-    <main>
+  <div class="topbar">
+    <div class="logo">Sansan</div>
+    <nav class="top-nav">
+      <span>BERANDA</span>
+      <span>TENTANG</span>
+      <span>INSTAGRAM ↗</span>
+      <span>TIKTOK ↗</span>
+    </nav>
+  </div>
 
-        <h2>My Books</h2>
+  <div class="hero">
+    <p class="lead">Welcome to little sansan</p>
+    <p class="script">digital book corner</p>
+  </div>
 
-        <div class="books">
+  <div class="controls">
+    <div class="filter-group">
+      <span class="filter-label">STATUS</span>
+      <div id="statusTabs" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="pill active" data-status="all">Semua</button>
+        <button class="pill" data-status="read">Selesai</button>
+        <button class="pill" data-status="reading">Sedang Dibaca</button>
+        <button class="pill" data-status="dropped">Berhenti</button>
+        <button class="pill" data-status="paused">Ditunda</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">CARI</span>
+      <div class="search-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input id="searchInput" type="text" placeholder="judul atau penulis...">
+      </div>
+    </div>
+  </div>
 
-            <div class="book">
-                <div class="cover">📕</div>
-                <h3>Sisi Tergelap Surga</h3>
-                <p>Brian Khrisna</p>
-            </div>
+  <div class="shelf-area">
+    <div class="shelf" id="shelf"></div>
+  </div>
 
-            <div class="book">
-                <div class="cover">📘</div>
-                <h3>The Midnight Library</h3>
-                <p>Matt Haig</p>
-            </div>
+  <footer>
+    Klik salah satu buku untuk lihat rating &amp; catatan. Ganti daftar di bagian <code>BOOKS</code> pada kode untuk pakai koleksimu sendiri.
+  </footer>
 
-            <div class="book">
-                <div class="cover">📗</div>
-                <h3>Educated</h3>
-                <p>Tara Westover</p>
-            </div>
+</div>
 
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose" aria-label="Tutup">✕</button>
+      <span class="status-badge" id="modalStatus"></span>
+      <h3 id="modalTitle"></h3>
+      <div class="author" id="modalAuthor"></div>
+      <div class="stars" id="modalStars"></div>
+      <p class="note" id="modalNote"></p>
+      <div class="meta" id="modalMeta"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- Ganti daftar buku di bawah ini dengan koleksimu sendiri ----
+  const BOOKS = [
+    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", rating: 5, pages: 535, font: "sans",
+      note: "Salah satu yang paling nempel. Minke sebagai narator bikin sejarah kolonial terasa dekat, bukan cuma teks pelajaran." },
+    { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", rating: 5, pages: 379, font: "sans",
+      note: "Nangis di bagian sudut pandang adiknya. Cara nyeritain kehilangan tanpa jadi melodramatik." },
+    { title: "Cantik Itu Luka", author: "Eka Kurniawan", status: "read", rating: 4, pages: 470, font: "sans",
+      note: "Liar dan gelap, campuran realisme magis yang jarang ketemu di novel lokal. Butuh jeda baca beberapa kali." },
+    { title: "Norwegian Wood", author: "Haruki Murakami", status: "read", rating: 4, pages: 296, font: "script",
+      note: "Melankolis banget, cocok dibaca pas musim hujan. Endingnya ngambang tapi entah kenapa pas." },
+    { title: "Educated", author: "Tara Westover", status: "read", rating: 5, pages: 334, font: "sans",
+      note: "Memoar yang bikin mikir ulang soal pendidikan dan keluarga. Beberapa bab berat, siapin mental." },
+    { title: "Gadis Kretek", author: "Ratih Kumala", status: "read", rating: 4, pages: 275, font: "sans",
+      note: "Riset soal industri kretek-nya kerasa detail, alur tiga generasinya rapi." },
+    { title: "Atomic Habits", author: "James Clear", status: "reading", rating: 0, pages: 320, font: "sans",
+      note: "Baru sampai bab tentang identity-based habits. Praktikal, banyak yang langsung bisa dicoba." },
+    { title: "Konspirasi Alam Semesta", author: "Fiersa Besari", status: "reading", rating: 0, pages: 354, font: "sans",
+      note: "Ringan buat selingan sebelum tidur, belum banyak progress minggu ini." },
+    { title: "Tomorrow, and Tomorrow, and Tomorrow", author: "Gabrielle Zevin", status: "reading", rating: 0, pages: 401, font: "script",
+      note: "Tentang dunia game development, seru tapi butuh fokus penuh biar nggak ketinggalan detail." },
+    { title: "Sapiens", author: "Yuval Noah Harari", status: "paused", rating: 0, pages: 443, font: "sans",
+      note: "Menarik di sepertiga awal, berhenti sementara buat baca yang lain dulu. Niat dilanjut lagi." },
+    { title: "It Ends With Us", author: "Colleen Hoover", status: "dropped", rating: 2, pages: 384, font: "script",
+      note: "Nggak cocok sama gaya nulisnya, berhenti di tengah part dua." },
+    { title: "The Housemaid", author: "Freida McFadden", status: "dropped", rating: 2, pages: 336, font: "sans",
+      note: "Twist-nya kebaca dari awal, jadi kehilangan tensi buat lanjut." }
+  ];
+
+  const STATUS_LABEL = { reading: "Sedang Dibaca", read: "Selesai Dibaca", dropped: "Berhenti Ditengah Jalan", paused: "Ditunda" };
+
+  // Terracotta gradient (dark to light) + one cream tone for contrast — 7 tones, cycled per book.
+  const SPINE_TONES = [
+    { bg: '#5C2A18', text: '#F4EFE0' },
+    { bg: '#7A3620', text: '#F4EFE0' },
+    { bg: '#8F4229', text: '#F4EFE0' },
+    { bg: '#A84B2F', text: '#F4EFE0' },
+    { bg: '#C75E3C', text: '#F4EFE0' },
+    { bg: '#D9805A', text: '#F4EFE0' },
+    { bg: '#F4EFE0', text: '#8F4229' }
+  ];
+
+  const FONT_MAP = {
+    sans: "'Public Sans', sans-serif",
+    script: "'Caveat', cursive"
+  };
+
+  function hashCode(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) { h = str.charCodeAt(i) + ((h << 5) - h); h |= 0; }
+    return Math.abs(h);
+  }
+
+  const shelfEl = document.getElementById('shelf');
+  const searchInput = document.getElementById('searchInput');
+  const tabsEl = document.getElementById('statusTabs');
+
+  let activeStatus = 'all';
+  let query = '';
+
+  function render() {
+    shelfEl.innerHTML = '';
+    const q = query.trim().toLowerCase();
+
+    const books = BOOKS
+      .map((b, i) => ({ ...b, _idx: i }))
+      .filter(b => activeStatus === 'all' || b.status === activeStatus)
+      .filter(b => !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
+
+    if (books.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.textContent = 'Nggak nemu buku itu di rak. Coba kata kunci lain.';
+      shelfEl.appendChild(empty);
+      return;
+    }
+
+    books.forEach(b => {
+      const h = hashCode(b.title + b.author);
+      const tone = SPINE_TONES[h % SPINE_TONES.length];
+      const width = 42 + Math.min(b.pages, 500) / 8;
+      const height = 190 + (h % 70);
+      const rotate = (h % 9) - 4;
+
+      const wrap = document.createElement('button');
+      wrap.className = 'spine';
+      wrap.style.width = width + 'px';
+      wrap.style.height = height + 'px';
+      wrap.style.transform = `rotate(${rotate}deg)`;
+      wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
+
+      const body = document.createElement('div');
+      body.className = 'spine-body';
+      body.style.background = tone.bg;
+      body.style.color = tone.text;
+      body.style.fontFamily = FONT_MAP[b.font] || FONT_MAP.sans;
+
+      body.innerHTML = `
+        <div class="spine-text">
+          <span class="spine-title">${b.title}</span>
+          <span class="spine-author">${b.author}</span>
         </div>
+      `;
 
-    </main>
+      if (b.status === 'reading') {
+        const ribbon = document.createElement('div');
+        ribbon.className = 'ribbon';
+        body.appendChild(ribbon);
+      }
+      if (b.status === 'dropped') {
+        const notch = document.createElement('div');
+        notch.className = 'notch';
+        body.appendChild(notch);
+      }
+
+      wrap.appendChild(body);
+      wrap.addEventListener('click', () => openModal(b));
+      shelfEl.appendChild(wrap);
+    });
+  }
+
+  tabsEl.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    tabsEl.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeStatus = btn.dataset.status;
+    render();
+  });
+
+  searchInput.addEventListener('input', e => {
+    query = e.target.value;
+    render();
+  });
+
+  // ---- Modal ----
+  const backdrop = document.getElementById('modalBackdrop');
+  const modalStatus = document.getElementById('modalStatus');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalAuthor = document.getElementById('modalAuthor');
+  const modalStars = document.getElementById('modalStars');
+  const modalNote = document.getElementById('modalNote');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalClose = document.getElementById('modalClose');
+
+  function starString(rating) {
+    if (!rating) return '<span class="off">belum dirating</span>';
+    let s = '';
+    for (let i = 1; i <= 5; i++) s += i <= rating ? '★' : '<span class="off">★</span>';
+    return s;
+  }
+
+  function openModal(book) {
+    modalStatus.textContent = STATUS_LABEL[book.status];
+    modalTitle.textContent = book.title;
+    modalTitle.style.fontFamily = FONT_MAP[book.font] || FONT_MAP.sans;
+    modalAuthor.textContent = book.author;
+    modalStars.innerHTML = starString(book.rating);
+    modalNote.textContent = book.note;
+    modalMeta.textContent = `${book.pages} halaman`;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  render();
+</script>
 
 </body>
 </html>
