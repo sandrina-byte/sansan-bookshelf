@@ -449,7 +449,7 @@
   const BOOKS = [
     { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", rating: 5, pages: 535, font: "sans",
       note: "Salah satu yang paling nempel. Minke sebagai narator bikin sejarah kolonial terasa dekat, bukan cuma teks pelajaran." },
-    { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", rating: 5, pages: 379, font: "sans",
+    { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", rating: 5, pages: 379, font: "sans", width: 42, height: 190,
       note: "Nangis di bagian sudut pandang adiknya. Cara nyeritain kehilangan tanpa jadi melodramatik." },
     { title: "Norwegian Wood", author: "Haruki Murakami", status: "read", rating: 4, pages: 296, font: "script",
       note: "Melankolis banget, cocok dibaca pas musim hujan. Endingnya ngambang tapi entah kenapa pas." },
@@ -512,8 +512,8 @@
     books.forEach(b => {
       const h = hashCode(b.title + b.author);
       const tone = SPINE_TONES[h % SPINE_TONES.length];
-      const width = 42 + Math.min(b.pages, 500) / 8;
-      const height = 190 + (h % 70);
+      const width = b.width || 42;
+      const height = b.height || 190;
       const rotate = (h % 9) - 4;
 
       const wrap = document.createElement('button');
