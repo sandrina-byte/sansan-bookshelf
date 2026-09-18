@@ -1,0 +1,193 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cream: #F7F1E5;
+    --paper: #FFFDF8;
+    --green: #3F5A45;
+    --green-light: #DCE5D8;
+    --red: #9B4B45;
+    --red-light: #E8D4CE;
+    --text: #292923;
+    --muted: #77736B;
+    --line: #D9D1C3;
+}
+
+
+/* BODY */
+
+body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* HEADER */
+
+header {
+    text-align: center;
+
+    padding: 80px 20px 60px;
+
+    border-bottom: 1px solid var(--line);
+
+    background: var(--cream);
+}
+
+header h1 {
+    color: var(--green);
+
+    font-size: 52px;
+
+    font-weight: normal;
+
+    margin-bottom: 15px;
+}
+
+header p {
+    color: var(--red);
+
+    font-size: 16px;
+
+    font-style: italic;
+}
+
+
+/* MAIN */
+
+main {
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 60px 30px;
+}
+
+h2 {
+    color: var(--green);
+
+    font-size: 32px;
+
+    font-weight: normal;
+
+    margin-bottom: 35px;
+}
+
+
+/* BOOK GRID */
+
+.books {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 35px;
+}
+
+
+/* BOOK CARD */
+
+.book {
+    background: var(--paper);
+
+    padding: 20px;
+
+    border: 1px solid var(--line);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.book:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 30px rgba(63, 90, 69, 0.12);
+}
+
+
+/* BOOK COVER */
+
+.cover {
+    height: 350px;
+
+    background: var(--green-light);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 80px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 5px solid var(--red);
+}
+
+
+/* BOOK TITLE */
+
+.book h3 {
+    color: var(--green);
+
+    font-size: 20px;
+
+    font-weight: normal;
+
+    margin-bottom: 6px;
+}
+
+
+/* AUTHOR */
+
+.book p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* ACCENT */
+
+.book:nth-child(2) .cover {
+    background: var(--red-light);
+
+    border-bottom-color: var(--green);
+}
+
+.book:nth-child(3) .cover {
+    background: #E7E0CF;
+
+    border-bottom-color: var(--red);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    header h1 {
+        font-size: 40px;
+    }
+
+    .books {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .books {
+        grid-template-columns: 1fr;
+    }
+
+}
