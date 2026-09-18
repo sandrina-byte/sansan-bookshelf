@@ -33,10 +33,11 @@
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
   .wrap {
-    max-width: 1180px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 40px 32px 80px;
   }
+  
 /* ---------- CSS ---------- */
   .top-section {
   display: grid;
@@ -103,6 +104,7 @@
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   margin: 0;
   letter-spacing: 0.01em;
+  padding-left: 120px; /* Ditambahkan */
 }
 
   /* ---------- Controls ---------- */
@@ -175,8 +177,11 @@
 
   /* ---------- Shelf ---------- */
 .shelf-area {
-  margin-top: 25px;
+  margin-top: 40px;
   margin-bottom: 0;
+  border-bottom: 1px solid rgba(244, 239, 224, 0.4); /* Garis putih bawah */
+  padding-bottom: 0;
+}
 }
 
 .shelf {
@@ -200,7 +205,14 @@
     justify-content: center;
     transition: transform 0.18s ease, filter 0.18s ease;
     transform-origin: bottom center;
+    height: 310px; /* Ditambahkan */
+    width: 44px;   /* Ditambahkan */
   }
+    
+    /* KODE DITAMBAHKAN DI SINI (Di bawah .spine) */
+  .spine:nth-child(even) { height: 350px; }
+  .spine:nth-child(3n) { height: 280px; }
+  .spine:nth-child(5n) { height: 330px; }
 
   .spine:hover, .spine:focus-visible {
     transform: translateY(-10px) rotate(0deg) !important;
