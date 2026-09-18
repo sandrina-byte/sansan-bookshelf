@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sansan's Digital Book Corner</title>
+<title>Sansan's Cabinet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
   body {
     margin: 0;
     color: var(--cream);
-    font-family: 'Public Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -75,15 +75,15 @@
 
   .hero .lead {
     font-family: 'Zeyada', cursive;
-    font-weight: 800;
+    font-weight: 400;
     font-size: clamp(1.5rem, 3.6vw, 2.3rem);
     margin: 0;
     letter-spacing: -0.01em;
   }
 
   .hero .script {
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
+    font-family: 'Canela', sans-serif;
+    font-weight: 800;
     font-size: clamp(3.4rem, 10vw, 6.4rem);
     line-height: 1;
     margin: 4px 0 2px;
@@ -115,7 +115,7 @@
   }
 
   .pill {
-    font-family: 'Public Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
     background: transparent;
@@ -360,12 +360,11 @@
 <div class="wrap">
 
   <div class="topbar">
-    <div class="logo">Sansan</div>
+    <div class="logo">Sansan's Digital Corner</div>
     <nav class="top-nav">
       <span>BERANDA</span>
       <span>TENTANG</span>
       <span>INSTAGRAM ↗</span>
-      <span>TIKTOK ↗</span>
     </nav>
   </div>
 
@@ -378,18 +377,18 @@
     <div class="filter-group">
       <span class="filter-label">STATUS</span>
       <div id="statusTabs" style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="pill active" data-status="all">Semua</button>
-        <button class="pill" data-status="read">Selesai</button>
-        <button class="pill" data-status="reading">Sedang Dibaca</button>
-        <button class="pill" data-status="dropped">Berhenti</button>
-        <button class="pill" data-status="paused">Ditunda</button>
+        <button class="pill active" data-status="all">All</button>
+        <button class="pill" data-status="read">Finished</button>
+        <button class="pill" data-status="reading">Reading</button>
+        <button class="pill" data-status="dropped">Drops</button>
+        <button class="pill" data-status="paused">On Hold</button>
       </div>
     </div>
     <div class="filter-group">
       <span class="filter-label">CARI</span>
       <div class="search-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input id="searchInput" type="text" placeholder="judul atau penulis...">
+        <input id="searchInput" type="text" placeholder="title or author...">
       </div>
     </div>
   </div>
@@ -447,7 +446,7 @@
       note: "Twist-nya kebaca dari awal, jadi kehilangan tensi buat lanjut." }
   ];
 
-  const STATUS_LABEL = { reading: "Sedang Dibaca", read: "Selesai Dibaca", dropped: "Berhenti Ditengah Jalan", paused: "Ditunda" };
+  const STATUS_LABEL = { reading: "Reading", read: "Finished", dropped: "Drops", paused: "On Hold" };
 
   // Terracotta gradient (dark to light) + one cream tone for contrast — 7 tones, cycled per book.
   const SPINE_TONES = [
