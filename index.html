@@ -163,14 +163,19 @@
   .search-pill input:focus { outline: none; }
 
   /* ---------- Shelf ---------- */
-  .shelf-area { margin-top: 56px; }
+.shelf-area {
+  margin-top: 25px;
+}
 
-  .shelf {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 0;
-  }
+.shelf {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  transform: scale(0.8);
+  transform-origin: top center;
+}
 
   .spine {
     position: relative;
