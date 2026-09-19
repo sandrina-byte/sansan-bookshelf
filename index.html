@@ -118,7 +118,6 @@
     margin: 44px 0 10px;
     padding-bottom: 4px;
   }
-  }
 
   .filter-group {
     display: flex;
@@ -377,9 +376,126 @@
   }
 
   @media (max-width: 640px) {
-    .wrap { padding: 28px 18px 60px; }
-    .topbar { flex-direction: column; }
-    .controls { justify-content: flex-start; }
+    /* ---------- HP ---------- */
+
+  .wrap {
+    padding: 28px 18px 50px;
+  }
+
+  /* Header */
+  .top-section {
+    display: block;
+  }
+
+  .topbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 42px;
+  }
+
+  .logo {
+    transform: none;
+    font-size: 1.15rem;
+    white-space: nowrap;
+  }
+
+  nav.top-nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    margin: 0;
+  }
+
+  .hero .lead {
+    font-size: 1rem;
+    transform: translateX(-1.2em);
+  }
+
+  .hero .script {
+    font-size: clamp(3.2rem, 15vw, 4.5rem);
+    line-height: 0.9;
+    margin: 4px 0 7px;
+  }
+
+  .hero .subline {
+    font-size: 0.95rem;
+    transform: translateX(1.5em);
+  }
+
+  /* Filters */
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 42px 0 14px;
+    padding: 0;
+  }
+
+  .filter-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .filter-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  #statusTabs,
+  #languageTabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 7px !important;
+    width: 100%;
+  }
+
+  .pill {
+    font-size: 0.68rem;
+    padding: 7px 12px;
+  }
+
+  /* Bookshelf */
+  .shelf-area {
+    margin-top: 28px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0 0 12px;
+    scrollbar-width: none;
+  }
+
+  .shelf-area::-webkit-scrollbar {
+    display: none;
+  }
+
+  .shelf {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: max-content;
+    min-width: 100%;
+    transform: scale(0.82);
+    transform-origin: bottom left;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 24px;
+    padding-top: 18px;
+    text-align: center;
+    font-size: 0.75rem;
   }
 </style>
 </head>
