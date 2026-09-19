@@ -124,7 +124,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .filter-label {
@@ -419,7 +419,7 @@
       
       <div class="filter-group">
         <span class="filter-label">LANGUAGE</span>
-        <div id="languageTabs" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div id="languageTabs" style="display:flex; gap:10px; flex-wrap:wrap;">
           <button class="pill active" data-lang="all">All</button>
           <button class="pill" data-lang="jp">Japanese</button>
           <button class="pill" data-lang="id">Bahasa Indonesia</button>
@@ -461,7 +461,7 @@
 <script>
   // ---- Ganti daftar buku di bawah ini dengan koleksimu sendiri ----
   const BOOKS = [
-    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", rating: 5, pages: 535, font: "sans", width: 64, height: 300,
+    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", language: "bahasa indonesia", rating: 5, pages: 535, font: "sans", width: 64, height: 300,
       note: "Salah satu yang paling nempel. Minke sebagai narator bikin sejarah kolonial terasa dekat, bukan cuma teks pelajaran." },
     { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", rating: 5, pages: 379, font: "sans", width: 56, height: 278,
       note: "Nangis di bagian sudut pandang adiknya. Cara nyeritain kehilangan tanpa jadi melodramatik." },
