@@ -419,13 +419,13 @@
       
       <div class="filter-group">
         <span class="filter-label">LANGUAGE</span>
-        <div id="languageTabs" style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="pill active" data-lang="all">All</button>
-          <button class="pill" data-lang="jp">Japanese</button>
-          <button class="pill" data-lang="id">Bahasa Indonesia</button>
-          <button class="pill" data-lang="en">English</button>
-        </div>
-      </div>
+        <div id="languageTabs" style="display:flex; gap: 8px; flex-wrap:wrap;">
+         <button class="tab active" data-language="all">All</button>
+        <button class="tab" data-language="japanese">Japanese</button>
+        <button class="tab" data-language="indonesia">Bahasa Indonesia</button>
+        <button class="tab" data-language="english">English</button>
+     </div>
+    </div>
     </div>
      
     <div class="shelf-area">
@@ -504,6 +504,7 @@
   const tabsEl = document.getElementById('statusTabs');
 
   let activeStatus = 'all';
+  let activeLanguage = 'all';
   let query = '';
 
   function render() {
@@ -513,6 +514,7 @@
     const books = BOOKS
       .map((b, i) => ({ ...b, _idx: i }))
       .filter(b => activeStatus === 'all' || b.status === activeStatus)
+      .filter(b => activeLanguage === 'all' || b.language === activeLanguage)
       .filter(b => !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
 
     if (books.length === 0) {
