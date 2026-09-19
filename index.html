@@ -514,6 +514,7 @@
     const books = BOOKS
       .map((b, i) => ({ ...b, _idx: i }))
       .filter(b => activeStatus === 'all' || b.status === activeStatus)
+      .filter(b => activeLanguage === 'all' || b.language === activeLanguage)
       .filter(b => !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
 
     if (books.length === 0) {
@@ -576,7 +577,21 @@
     activeStatus = btn.dataset.status;
     render();
   });
+// agar tombol LANGUAGE benar-benar berfungsi.
+  const languageTabs = document.getElementById('languageTabs');
 
+  languageTabs.addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+
+  languageTabs.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  activeLanguage = btn.dataset.lang;
+  render();
+});
+
+  
   searchInput.addEventListener('input', e => {
     query = e.target.value;
     render();
