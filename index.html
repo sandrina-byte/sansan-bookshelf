@@ -368,7 +368,15 @@
   .modal .stars .off { opacity: 0.3; }
 
   .modal .note { font-family: 'Public Sans', sans-serif; font-size: 0.98rem; line-height: 1.55; }
-
+  .personal-note-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 8px;
+  }
+  
   .modal .meta {
     margin-top: 18px;
     padding-top: 14px;
@@ -571,6 +579,7 @@
       <h3 id="modalTitle"></h3>
       <div class="author" id="modalAuthor"></div>
       <div class="stars" id="modalStars"></div>
+      <div class="personal-note-label">Personal notes</div>
       <p class="note" id="modalNote"></p>
       <div class="meta" id="modalMeta"></div>
     </div>
@@ -580,7 +589,7 @@
 <script>
   // ---- Ganti daftar buku di bawah ini dengan koleksimu sendiri ----
   const BOOKS = [
-    { title: "Pulang", author: "Leila S. Chudori", status: "read", language: "id", rating: 4, pages: 552, font: "sans", width: 64, height: 300,
+    { title: "Pulang", author: "Leila S. Chudori", status: "read", language: "id", rating: 4, pages: 552, font: "sans", width: 64, height: 400,
       note: "Berlatar historis pada tragedi 1965 dan gejolak sosial-politik yang mengikutinya, Pulang mengisahkan perjalanan hidup para eksil politik Indonesia dan keluarga yang mereka tinggalkan. Namun, luka sejarah ternyata tidak berhenti pada mereka yang mengalaminya. Ia diwariskan kepada anak-cucu dalam bentuk stigma, ketakutan, identitas yang disembunyikan, hingga keberanian untuk mempertanyakan kembali narasi sejarah yang selama puluhan tahun diterima begitu saja. Dan pada akhirnya, pertanyaannya bukan hanya “Inginkah kita pulang?”, tetapi juga: “Pulang kepada siapa, kepada apa, dan kepada sejarah yang mana?”" 
     },
     { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", language: "id", rating: 5, pages: 379, font: "sans", width: 56, height: 278,
@@ -637,7 +646,7 @@
     if (books.length === 0) {
       const empty = document.createElement('div');
       empty.className = 'empty-state';
-      empty.textContent = 'None';
+      empty.textContent = 'Nothing to read here';
       shelfEl.appendChild(empty);
       return;
     }
