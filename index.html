@@ -461,17 +461,17 @@
 <script>
   // ---- Ganti daftar buku di bawah ini dengan koleksimu sendiri ----
   const BOOKS = [
-    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", language: "bahasa indonesia", rating: 5, pages: 535, font: "sans", width: 64, height: 300,
+    { title: "Bumi Manusia", author: "Pramoedya Ananta Toer", status: "read", language: "id", rating: 5, pages: 535, font: "sans", width: 64, height: 300,
       note: "Salah satu yang paling nempel. Minke sebagai narator bikin sejarah kolonial terasa dekat, bukan cuma teks pelajaran." },
-    { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", rating: 5, pages: 379, font: "sans", width: 56, height: 278,
+    { title: "Laut Bercerita", author: "Leila S. Chudori", status: "read", language: "id", rating: 5, pages: 379, font: "sans", width: 56, height: 278,
       note: "Nangis di bagian sudut pandang adiknya. Cara nyeritain kehilangan tanpa jadi melodramatik." },
-    { title: "Norwegian Wood", author: "Haruki Murakami", status: "read", rating: 4, pages: 296, font: "script", width: 54, height: 264,
+    { title: "Norwegian Wood", author: "Haruki Murakami", status: "read", language: "id", rating: 4, pages: 296, font: "script", width: 54, height: 264,
       note: "Melankolis banget, cocok dibaca pas musim hujan. Endingnya ngambang tapi entah kenapa pas." },
-    { title: "Educated", author: "Tara Westover", status: "read", rating: 5, pages: 334, font: "sans", width: 60, height: 270,
+    { title: "Educated", author: "Tara Westover", status: "read", language: "id", rating: 5, pages: 334, font: "sans", width: 60, height: 270,
       note: "Memoar yang bikin mikir ulang soal pendidikan dan keluarga. Beberapa bab berat, siapin mental." },
-    { title: "Gadis Kretek", author: "Ratih Kumala", status: "read", rating: 4, pages: 275, font: "sans", width: 50, height: 250,
+    { title: "Gadis Kretek", author: "Ratih Kumala", status: "read", language: "id", rating: 4, pages: 275, font: "sans", width: 50, height: 250,
       note: "Riset soal industri kretek-nya kerasa detail, alur tiga generasinya rapi." },
-    { title: "Atomic Habits", author: "James Clear", status: "reading", rating: 0, pages: 320, font: "sans", width: 58, height: 270,
+    { title: "Atomic Habits", author: "James Clear", status: "reading", language: "id", rating: 0, pages: 320, font: "sans", width: 58, height: 270,
       note: "Baru sampai bab tentang identity-based habits. Praktikal, banyak yang langsung bisa dicoba." }
   ];
 
@@ -504,6 +504,7 @@
   const tabsEl = document.getElementById('statusTabs');
 
   let activeStatus = 'all';
+  let activeLanguage = 'all';
   let query = '';
 
   function render() {
