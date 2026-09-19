@@ -391,8 +391,8 @@
     <div class="topbar">
     <div class="logo">Sansan's Corner</div>
     <nav class="top-nav">
-      <span>BERANDA</span>
-      <span>TENTANG</span>
+      <span>HOME</span>
+      <span>ABOUT</span>
       <span>INSTAGRAM</span>
     </nav>
   </div>
@@ -519,7 +519,7 @@
     if (books.length === 0) {
       const empty = document.createElement('div');
       empty.className = 'empty-state';
-      empty.textContent = 'Nggak nemu buku itu di rak. Coba kata kunci lain.';
+      empty.textContent = 'None';
       shelfEl.appendChild(empty);
       return;
     }
