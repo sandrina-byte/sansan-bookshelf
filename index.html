@@ -500,7 +500,6 @@
   }
 
   const shelfEl = document.getElementById('shelf');
-  const searchInput = document.getElementById('searchInput');
   const tabsEl = document.getElementById('statusTabs');
 
   let activeStatus = 'all';
@@ -590,12 +589,6 @@
   activeLanguage = btn.dataset.lang;
   render();
 });
-
-  
-  searchInput.addEventListener('input', e => {
-    query = e.target.value;
-    render();
-  });
 
   // ---- Modal ----
   const backdrop = document.getElementById('modalBackdrop');
