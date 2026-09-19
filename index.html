@@ -74,7 +74,15 @@
     color: var(--cream);
   }
   
-  nav.top-nav span { opacity: 0.9; }
+  nav.top-nav a { 
+  opacity: 0.9;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+nav.top-nav a:hover {
+  opacity: 1;
+}
 
   /* ---------- Hero ---------- */
   .hero {
@@ -385,7 +393,67 @@
     font-size: 0.82rem;
     opacity: 0.75;
   }
+.about-backdrop {  /* ---------- agar ABOUT popup muncul ---------- */
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 16, 8, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
 
+.about-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.about-modal {
+  position: relative;
+  width: min(520px, 100%);
+  background: var(--cream);
+  color: var(--royal);
+  padding: 42px 40px;
+  border-radius: 4px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+}
+
+.about-label {
+  margin: 0 0 12px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.about-modal h2 {
+  margin: 0 0 18px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+.about-modal p {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.about-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--royal);
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+  
   @media (max-width: 640px) {
     /* ---------- TAMPILAN HP ---------- */
 
@@ -519,9 +587,9 @@
     <div class="topbar">
     <div class="logo">Sansan's Corner</div>
     <nav class="top-nav">
-      <span>HOME</span>
-      <span>ABOUT</span>
-      <span>INSTAGRAM</span>
+      <a href="#home">HOME</a>
+      <a href="#" id="aboutLink">ABOUT</a>
+      <a href="https://www.instagram.com/ferasandrina/" target="_blank">INSTAGRAM</a>
     </nav>
   </div>
    <div class="main-content">
@@ -556,7 +624,7 @@
       </div>
     </div>
      
-    <div class="shelf-area">
+    <div class="shelf-area" id="home">
       <div class="shelf" id="shelf"></div>
     </div>
 
@@ -587,6 +655,26 @@
   </div>
 </div>
 
+  <div class="about-backdrop" id="aboutBackdrop">
+  <div class="about-modal">
+    <button class="about-close" id="aboutClose" aria-label="Close">×</button>
+
+    <p class="about-label">ABOUT</p>
+
+    <h2>Sansan's Corner</h2>
+
+    <p>
+      A little corner on the internet where I keep track of
+      the books I've read, am reading, or left unfinished.
+    </p>
+
+    <p>
+      This is a small collection of stories, thoughts, and books
+      that have found their way into my life.
+    </p>
+  </div>
+</div>
+  
 <script>
   // ---- Ganti daftar buku di bawah ini dengan koleksimu sendiri ----
   const BOOKS = [
@@ -758,6 +846,29 @@
   backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+    // ---- About Modal ----
+  const aboutLink = document.getElementById('aboutLink');
+  const aboutBackdrop = document.getElementById('aboutBackdrop');
+  const aboutClose = document.getElementById('aboutClose');
+
+  aboutLink.addEventListener('click', e => {
+    e.preventDefault();
+    aboutBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  aboutClose.addEventListener('click', () => {
+    aboutBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  aboutBackdrop.addEventListener('click', e => {
+    if (e.target === aboutBackdrop) {
+      aboutBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  
   render();
 </script>
 
