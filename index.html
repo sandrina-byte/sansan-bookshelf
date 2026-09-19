@@ -111,11 +111,13 @@
   /* ---------- Controls ---------- */
   .controls {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: no wrap;
     gap: 28px;
     align-items: center;
     justify-content: center;
     margin: 44px 0 10px;
+    padding-bottom: 4px;
+  }
   }
 
   .filter-group {
@@ -414,18 +416,18 @@
         </div>
       </div>
 
+      
       <div class="filter-group">
-        <span class="filter-label">Find</span>
-        <div class="search-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <circle cx="11" cy="11" r="7"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input id="searchInput" type="text" placeholder="title or author...">
+        <span class="filter-label">LANGUAGE</span>
+        <div id="languageTabs" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="pill active" data-lang="all">All</button>
+          <button class="pill" data-lang="jp">Japanese</button>
+          <button class="pill" data-lang="id">Bahasa Indonesia</button>
+          <button class="pill" data-lang="en">English</button>
         </div>
       </div>
     </div>
-
+     
     <div class="shelf-area">
       <div class="shelf" id="shelf"></div>
     </div>
