@@ -219,7 +219,7 @@ nav.top-nav a:hover {
     transition: transform 0.18s ease, filter 0.18s ease;
     transform-origin: bottom center;
   }
-  
+
   .spine:hover, .spine:focus-visible {
     transform: translateY(-10px) rotate(0deg) !important;
     filter: brightness(1.08);
@@ -325,7 +325,7 @@ nav.top-nav a:hover {
   .modal-backdrop.open { opacity: 1; pointer-events: auto; }
 
   .modal {
-    background: var(--royal-panel);
+    background: var(--royal-deep);
     border: 1.5px solid rgba(244,239,224,0.3);
     max-width: 440px;
     width: 100%;
@@ -746,50 +746,49 @@ nav.top-nav a:hover {
       return;
     }
 
-  books.forEach(b => {
-  const h = hashCode(b.title + b.author);
-  const tone = SPINE_TONES[h % SPINE_TONES.length];
-  const width = b.width || 42;
-  const height = b.height || 190;
-  const rotate = (h % 9) - 4;
+    books.forEach(b => {
+      const h = hashCode(b.title + b.author);
+      const tone = SPINE_TONES[h % SPINE_TONES.length];
+      const width = b.width || 42;
+      const height = b.height || 190;
+      const rotate = (h % 9) - 4;
 
-  const wrap = document.createElement('button');
+      const wrap = document.createElement('button');
+      wrap.className = 'spine';
+      wrap.style.width = width + 'px';
+      wrap.style.height = height + 'px';
+      wrap.style.transform = `rotate(${rotate}deg)`;
+      wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
 
-  wrap.className = 'spine';
-  wrap.style.width = width + 'px';
-  wrap.style.height = height + 'px';
-  wrap.style.transform = `rotate(${rotate}deg)`;
-  wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
+      const body = document.createElement('div');
+      body.className = 'spine-body';
+      body.style.background = tone.bg;
+      body.style.color = tone.text;
+      body.style.fontFamily = FONT_MAP[b.font] || FONT_MAP.sans;
 
-  const body = document.createElement('div');
-  body.className = 'spine-body';
-  body.style.background = tone.bg;
-  body.style.color = tone.text;
-  body.style.fontFamily = FONT_MAP[b.font] || FONT_MAP.sans;
+      body.innerHTML = `
+        <div class="spine-text">
+          <span class="spine-title">${b.title}</span>
+          <span class="spine-author">${b.author}</span>
+        </div>
+      `;
 
-  body.innerHTML = `
-    <div class="spine-text">
-      <span class="spine-title">${b.title}</span>
-      <span class="spine-author">${b.author}</span>
-    </div>
-  `;
+      if (b.status === 'reading') {
+        const ribbon = document.createElement('div');
+        ribbon.className = 'ribbon';
+        body.appendChild(ribbon);
+      }
+      if (b.status === 'dropped') {
+        const notch = document.createElement('div');
+        notch.className = 'notch';
+        body.appendChild(notch);
+      }
 
-  if (b.status === 'reading') {
-    const ribbon = document.createElement('div');
-    ribbon.className = 'ribbon';
-    body.appendChild(ribbon);
+      wrap.appendChild(body);
+      wrap.addEventListener('click', () => openModal(b));
+      shelfEl.appendChild(wrap);
+    });
   }
-
-  if (b.status === 'dropped') {
-    const notch = document.createElement('div');
-    notch.className = 'notch';
-    body.appendChild(notch);
-  }
-
-  wrap.appendChild(body);
-  wrap.addEventListener('click', () => openModal(b));
-  shelfEl.appendChild(wrap);
-});
 
   tabsEl.addEventListener('click', e => {
     const btn = e.target.closest('button');
