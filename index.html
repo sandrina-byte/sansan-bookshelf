@@ -746,62 +746,50 @@ nav.top-nav a:hover {
       return;
     }
 
-    books.forEach((b, index) => {
-      const h = hashCode(b.title + b.author);
-      const tone = SPINE_TONES[h % SPINE_TONES.length];
-      const width = b.width || 42;
-      const height = b.height || 190;
-      const rotate = (h % 9) - 4;
+  books.forEach(b => {
+  const h = hashCode(b.title + b.author);
+  const tone = SPINE_TONES[h % SPINE_TONES.length];
+  const width = b.width || 42;
+  const height = b.height || 190;
+  const rotate = (h % 9) - 4;
 
-        const wrap = document.createElement('button');
-      
-        wrap.className = 'spine';
-        wrap.style.width = width + 'px';
-        wrap.style.height = height + 'px';
-        wrap.style.setProperty('--book-rotate', `${rotate}deg`);
-        wrap.style.animationDelay = `${index * 70}ms`;
-        wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
-      
-        const body = document.createElement('div');
-  
-     
-      wrap.style.setProperty('--book-rotate', `${rotate}deg`);
-      wrap.style.animationDelay = `${index * 70}ms`;
-      wrap.className = 'spine';
-      wrap.style.width = width + 'px';
-      wrap.style.height = height + 'px';
-      wrap.style.setProperty('--book-rotate', `${rotate}deg`);
-      wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
+  const wrap = document.createElement('button');
 
-      const body = document.createElement('div');
-      body.className = 'spine-body';
-      body.style.background = tone.bg;
-      body.style.color = tone.text;
-      body.style.fontFamily = FONT_MAP[b.font] || FONT_MAP.sans;
+  wrap.className = 'spine';
+  wrap.style.width = width + 'px';
+  wrap.style.height = height + 'px';
+  wrap.style.transform = `rotate(${rotate}deg)`;
+  wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
 
-      body.innerHTML = `
-        <div class="spine-text">
-          <span class="spine-title">${b.title}</span>
-          <span class="spine-author">${b.author}</span>
-        </div>
-      `;
+  const body = document.createElement('div');
+  body.className = 'spine-body';
+  body.style.background = tone.bg;
+  body.style.color = tone.text;
+  body.style.fontFamily = FONT_MAP[b.font] || FONT_MAP.sans;
 
-      if (b.status === 'reading') {
-        const ribbon = document.createElement('div');
-        ribbon.className = 'ribbon';
-        body.appendChild(ribbon);
-      }
-      if (b.status === 'dropped') {
-        const notch = document.createElement('div');
-        notch.className = 'notch';
-        body.appendChild(notch);
-      }
+  body.innerHTML = `
+    <div class="spine-text">
+      <span class="spine-title">${b.title}</span>
+      <span class="spine-author">${b.author}</span>
+    </div>
+  `;
 
-      wrap.appendChild(body);
-      wrap.addEventListener('click', () => openModal(b));
-      shelfEl.appendChild(wrap);
-    });
+  if (b.status === 'reading') {
+    const ribbon = document.createElement('div');
+    ribbon.className = 'ribbon';
+    body.appendChild(ribbon);
   }
+
+  if (b.status === 'dropped') {
+    const notch = document.createElement('div');
+    notch.className = 'notch';
+    body.appendChild(notch);
+  }
+
+  wrap.appendChild(body);
+  wrap.addEventListener('click', () => openModal(b));
+  shelfEl.appendChild(wrap);
+});
 
   tabsEl.addEventListener('click', e => {
     const btn = e.target.closest('button');
