@@ -219,64 +219,6 @@ nav.top-nav a:hover {
     transition: transform 0.18s ease, filter 0.18s ease;
     transform-origin: bottom center;
   }
-  /* ---------- Book entrance animation ---------- */
-
-.spine {
-  opacity: 0;
-  animation: bookAppear 0.55s ease forwards;
-}
-
-@keyframes bookAppear {
-  from {
-    opacity: 0;
-    transform: translateY(25px) rotate(var(--book-rotate));
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(var(--book-rotate));
-  }
-
-  /* ---------- Book click feedback ---------- */
-
-.spine:active {
-  transform: translateY(-4px) scale(0.97) !important;
-}
-
-/* ---------- Modal animation ---------- */
-
-.modal {
-  transform: translateY(18px) scale(0.96);
-  opacity: 0;
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-}
-
-.modal-backdrop.open .modal {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-/* ---------- Shelf transition ---------- */
-
-.shelf {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-/* ---------- Button interaction ---------- */
-
-.pill {
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    border-color 0.15s ease,
-    background 0.15s ease;
-}
-
-.pill:active {
-  transform: scale(0.95);
-}
   
   .spine:hover, .spine:focus-visible {
     transform: translateY(-10px) rotate(0deg) !important;
@@ -810,6 +752,18 @@ nav.top-nav a:hover {
       const width = b.width || 42;
       const height = b.height || 190;
       const rotate = (h % 9) - 4;
+
+        const wrap = document.createElement('button');
+      
+        wrap.className = 'spine';
+        wrap.style.width = width + 'px';
+        wrap.style.height = height + 'px';
+        wrap.style.setProperty('--book-rotate', `${rotate}deg`);
+        wrap.style.animationDelay = `${index * 70}ms`;
+        wrap.setAttribute('aria-label', `${b.title}, ${b.author}`);
+      
+        const body = document.createElement('div');
+  
      
       wrap.style.setProperty('--book-rotate', `${rotate}deg`);
       wrap.style.animationDelay = `${index * 70}ms`;
